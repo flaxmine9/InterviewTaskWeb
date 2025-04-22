@@ -1,0 +1,64 @@
+﻿@model OrganizationViewModel
+
+@{
+    ViewData["Title"] = "Иерархия подразделений";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="organization-hierarchy">
+        @foreach (var company in Model.Companies)
+        {
+            <div class="company">
+                <strong>@company.Name</strong> <span class="text-muted">(@company.Code)</span>
+
+                @foreach (var department in company.Departments)
+                {
+                    <div class="department ml-3">
+                        <strong>@department.Name</strong> <span class="text-muted">(@department.Code)</span>
+
+                        @foreach (var otdel in department.Otdels)
+                        {
+                            <div class="otdel ml-5">
+                                @otdel.Name <span class="text-muted">(@otdel.Code)</span>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .organization-hierarchy {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .company {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        background-color: #f8f9fa;
+        border-left: 4px solid #007bff;
+    }
+
+    .department {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        background-color: #e9ecef;
+        border-left: 4px solid #28a745;
+    }
+
+    .division {
+        margin: 0.3rem 0;
+        padding: 0.3rem 0.5rem;
+        background-color: #f8f9fa;
+        border-left: 4px solid #fd7e14;
+    }
+
+    .text-muted {
+        color: #6c757d;
+        font-size: 0.9em;
+    }
+</style>
